@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WebApplication1.Models.Car>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        @*<p>hello world</p>
+        <p>View Data:</p>
+        <p>@ViewData["tytul"]</p>
+        <p>@ViewData["liczba"]</p>
+        <br />
+        <br />
+        <p>View Bag:</p>
+        <p>@ViewBag.tytul</p>
+        <p>@ViewBag.liczba</p>
+        <p>@ViewBag.tytul2</p>
+        <p>@ViewBag.liczba2</p>
+        <br />
+        <br />
+        <p>Stringly Typed:</p>
+        <p>@Model.ID</p>*@
+        <table>
+            <tr><td>Id</td><td>Model</td></tr>
+            @foreach (var wiersz in Model)
+            {
+                <tr><td>@wiersz.Id</td><td>@wiersz.Model</td></tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

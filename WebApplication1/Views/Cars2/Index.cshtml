@@ -1,0 +1,78 @@
+﻿@model PagedList.IPagedList<WebApplication1.Models.Car>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        <div>Model: </div>
+        <div>@Html.TextBox("ModelZnajdz")</div>
+        <div>Brand: </div>
+        <div>@Html.TextBox("BrandZnajdz")</div>
+        <input type="submit" value="Szukaj"/>
+    }
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Brand)
+            </th>
+            <th>
+                @Html.ActionLink("Model", "Index", new { sortowanie = ViewBag.SortByModel, BrandZnajdz = ViewBag.BrandZnajdz, ModelZnajdz = ViewBag.ModelZnajdz })
+            </th>
+            <th>
+                @Html.ActionLink("Price", "Index", new { sortowanie = ViewBag.SortByPrice, BrandZnajdz = ViewBag.BrandZnajdz, ModelZnajdz = ViewBag.ModelZnajdz })
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Bought)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Sold)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Model)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bought)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sold)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+    
+    </table>
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortowanie = ViewBag.SorteBy, BrandZnajdz = ViewBag.BrandZnajdz, ModelZnajdz = ViewBag.ModelZnajdz}))
+</body>
+</html>
